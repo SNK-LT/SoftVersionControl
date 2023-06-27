@@ -1,6 +1,23 @@
 <html>
 
 <body>
-    <div>{{some}}</div>
+<div>
+    <form method="post">
+        <input type="text" name="login" placeholder="Введите имя пользователя">
+        <input type="text" name="password" placeholder="Введите пароль">
+        <input type="text" name="access" placeholder="И уровень доступа">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+    <div>Список сообщений</div>
+    {{#users}}
+        <b>{{id}}</b>
+        <span>{{name}}</span>
+        <i>{{email}}</i>
+        <p>{{access}}</p>
+    {{/users}}
 </body>
 </html>
+
+
+
