@@ -1,10 +1,9 @@
 package com.example.SoftVersionControl.controllers;
 
-import com.example.SoftVersionControl.domain.User;
+import com.example.SoftVersionControl.entities.User;
 import com.example.SoftVersionControl.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +20,7 @@ public class GreetingController {
         return "greeting";
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String main(Map<String, Object> model){
         Iterable<User> users = userRepo.findAll();
         model.put("Users", users);
@@ -36,6 +35,8 @@ public class GreetingController {
         Iterable<User> users = userRepo.findAll();
         model.put("Users", users);
 
-        return "main";
+        return "redirect:/";
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.example.SoftVersionControl.domain;
+package com.example.SoftVersionControl.entities;
 
 import jakarta.persistence.*;
 

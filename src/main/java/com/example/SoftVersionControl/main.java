@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SoftVersionControlApplication {
+public class main {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SoftVersionControlApplication.class, args);
+		SpringApplication.run(main.class, args);
 	}
 }
