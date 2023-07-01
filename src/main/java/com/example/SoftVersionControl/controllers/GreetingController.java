@@ -27,7 +27,7 @@ public class GreetingController {
         return "main";
     }
 
-    @PostMapping
+    @PostMapping()
     public String addUser(@RequestParam String login, @RequestParam String password, @RequestParam Integer access, Map<String, Object> model){
         User user = new User(login, password, access);
         userRepo.save(user);
@@ -36,6 +36,20 @@ public class GreetingController {
         model.put("Users", users);
 
         return "redirect:/";
+    }
+    @PostMapping("/logInSystem")
+    public  String logInSystem(@RequestParam("inLogin") String inLogin, @RequestParam("inPassword") String inPassword){
+
+        User loggedUser = userRepo.findByLogin(inLogin);
+        if(loggedUser != null && loggedUser.getPassword().equals(inPassword))
+        {
+            return "greeting";
+        }
+        else
+        {
+            System.out.println("Wrong password!");
+            return "redirect:/";
+        }
     }
 
 
