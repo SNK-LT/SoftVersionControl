@@ -15,13 +15,17 @@
 
         .create-user-container {
             display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             max-width: 400px;
-            margin: 0 auto;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
+            z-index: 9999;
         }
 
         input[type="text"],
@@ -42,20 +46,53 @@
             cursor: pointer;
         }
 
-        div.List-of-users {
-            margin-top: 20px;
-            text-align: center;
-            font-weight: bold;
+        .container {
+            display: flex;
         }
 
-        div.User {
+        .module-table {
+            flex-grow: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .user-list {
+            flex-grow: 1;
+        }
+
+        .user-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-container .user {
             margin-top: 10px;
             background-color: rgba(255, 255, 255, 0.9);
             padding: 10px;
             border-radius: 4px;
         }
 
-        div.User span {
+        .user-container .user span {
             margin-left: 10px;
         }
     </style>
@@ -84,14 +121,38 @@
         <button type="submit">Create user</button>
     </form>
 </div>
-<div class="List-of-users">List of users</div>
-{{#Users}}
-    <div class="User">
-        <b>{{id}}</b>
-        <span>{{login}}</span>
-        <i>{{password}}</i>
-        <i>{{access}}</i>
+<div class="container">
+    <div class="module-table">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Module Name</th>
+                <th>Min Version</th>
+                <th>Actual Version</th>
+            </tr>
+            {{#ModuleEntity}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{module_name}}</td>
+                    <td>{{min_version}}</td>
+                    <td>{{actual_version}}</td>
+                </tr>
+            {{/ModuleEntity}}
+        </table>
     </div>
-{{/Users}}
+    <div class="user-list">
+        <div class="user-container">
+            <div class="List-of-users">List of users</div>
+            {{#Users}}
+                <div class="user">
+                    <b>{{id}}</b>
+                    <span>{{login}}</span>
+                    <i>{{password}}</i>
+                    <i>{{access}}</i>
+                </div>
+            {{/Users}}
+        </div>
+    </div>
+</div>
 </body>
 </html>

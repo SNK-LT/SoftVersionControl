@@ -1,6 +1,6 @@
 package com.example.SoftVersionControl.controllers;
 
-import com.example.SoftVersionControl.entities.User;
+import com.example.SoftVersionControl.entities.UserEntity;
 import com.example.SoftVersionControl.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ public class LoginController {
 
     @GetMapping("/")
     public String main(Map<String, Object> model){
-        Iterable<User> users = userRepo.findAll();
+        Iterable<UserEntity> users = userRepo.findAll();
         model.put("Users", users);
         return "login";
     }
@@ -25,12 +25,12 @@ public class LoginController {
     @PostMapping("/logInSystem")
     public  String logInSystem(@RequestParam("inLogin") String inLogin, @RequestParam("inPassword") String inPassword, Map<String, Object> model){
 
-        User loggedUser = userRepo.findByLogin(inLogin);
+        UserEntity loggedUser = userRepo.findByLogin(inLogin);
         if(loggedUser != null)
         {
             if(loggedUser.getPassword().equals(inPassword))
             {
-                return "redirect:/adminMainPage";
+                return "redirect:/mainPage";
             }
             else
             {

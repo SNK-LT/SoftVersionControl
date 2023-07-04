@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity// This tells Hibernate to make a table out of this class
 @Table(name = "users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
@@ -15,7 +15,7 @@ public class User {
 
     private Integer access;
 
-    public User() {
+    public UserEntity() {
 
     }
 
@@ -43,7 +43,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String login, String password, Integer access) {
+    public UserEntity(String login, String password, Integer access) {
         this.login = login;
         this.password = password;
         this.access = access;
