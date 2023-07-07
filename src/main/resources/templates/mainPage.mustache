@@ -1,158 +1,98 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Module List</title>
     <style>
         body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5% 12%;
             background-image: linear-gradient(to bottom, rgba(69, 153, 237, 0.5), rgba(9, 109, 217, 0.5));
             font-family: Arial, sans-serif;
         }
-
-        .create-user-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .create-user-container {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 400px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            z-index: 9999;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .container {
-            display: flex;
-        }
-
-        .module-table {
-            flex-grow: 1;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-right: 20px;
-        }
-
         table {
-            width: 100%;
             border-collapse: collapse;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
         }
-
         th, td {
-            padding: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 8px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
         }
-
         th {
             background-color: #f2f2f2;
         }
-
-        .user-list {
-            flex-grow: 1;
+        .button-container {
+            display: flex;
         }
-
-        .user-container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .user-container .user {
-            margin-top: 10px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
+        .button-container button {
+            padding: 5px 10px;
+            background-color: #eaeaea;
+            border: none;
             border-radius: 4px;
+            font-family: inherit;
+            cursor: pointer;
         }
-
-        .user-container .user span {
-            margin-left: 10px;
+        .button-container button .trash-icon {
+            color: red;
+        }
+        .button-container button:hover {
+            background-color: #d4d4d4;
         }
     </style>
-    <script>
-        function toggleCreateUser() {
-            var createUserButton = document.getElementById("createUserButton");
-            var createUserContainer = document.getElementById("createUserContainer");
-
-            if (createUserContainer.style.display === "" || createUserContainer.style.display === "none") {
-                createUserContainer.style.display = "block";
-                createUserButton.innerText = "Cancel";
-            } else {
-                createUserContainer.style.display = "none";
-                createUserButton.innerText = "Create User";
-            }
-        }
-    </script>
+    <!-- Подключение стилей иконок Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-<button id="createUserButton" class="create-user-button" onclick="toggleCreateUser()">Create User</button>
-<div id="createUserContainer" class="create-user-container">
-    <form method="post" action="/">
-        <input type="text" name="login" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="text" name="access" placeholder="Access level">
-        <button type="submit">Create user</button>
-    </form>
-</div>
-<div class="container">
-    <div class="module-table">
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Module Name</th>
-                <th>Min Version</th>
-                <th>Actual Version</th>
-            </tr>
-            {{#ModuleEntity}}
-                <tr>
-                    <td>{{id}}</td>
-                    <td>{{module_name}}</td>
-                    <td>{{min_version}}</td>
-                    <td>{{actual_version}}</td>
-                </tr>
-            {{/ModuleEntity}}
-        </table>
-    </div>
-    <div class="user-list">
-        <div class="user-container">
-            <div class="List-of-users">List of users</div>
-            {{#Users}}
-                <div class="user">
-                    <b>{{id}}</b>
-                    <span>{{login}}</span>
-                    <i>{{password}}</i>
-                    <i>{{access}}</i>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Module Name</th>
+        <th>Minimum Version</th>
+        <th>Actual Version</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#ModuleEntity}}
+        <tr>
+            <td>{{id}}</td>
+            <td title="{{module_name}}">{{module_name}}</td>
+            <td title="{{min_version}}">{{min_version}}</td>
+            <td title="{{actual_version}}">{{actual_version}}</td>
+            <td>
+                <div class="button-container">
+                    <button class="edit-button" data-module-id="{{id}}"><i class="fas fa-cog"></i></button>
+                    <button><i class="fas fa-trash-alt trash-icon"></i></button>
                 </div>
-            {{/Users}}
-        </div>
-    </div>
-</div>
+            </td>
+        </tr>
+    {{/ModuleEntity}}
+    </tbody>
+</table>
+
+<script>
+    // Получение всех кнопок редактирования
+    const editButtons = document.querySelectorAll('.edit-button');
+
+    // Добавление обработчика события клика на каждую кнопку
+    editButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const moduleId = button.dataset.moduleId;
+            window.location.href = `/versions/${moduleId}`;
+        });
+    });
+</script>
+
 </body>
 </html>
