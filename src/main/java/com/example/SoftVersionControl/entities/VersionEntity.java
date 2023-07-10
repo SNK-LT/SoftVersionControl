@@ -53,4 +53,5 @@ public class VersionEntity {
     public void setModule(ModuleEntity module) {
         this.module = module;
     }
+
 }

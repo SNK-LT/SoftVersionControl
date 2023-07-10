@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface VersionRepo extends JpaRepository<VersionEntity, Integer> {
     List<VersionEntity> findByModule(ModuleEntity module);
+
 }
