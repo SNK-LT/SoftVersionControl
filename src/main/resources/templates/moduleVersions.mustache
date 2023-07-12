@@ -93,10 +93,26 @@
         .add-version-button:hover {
             background-color: #d4d4d4;
         }
+        .return-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .return-button i {
+            font-size: 18px;
+        }
+        .return-button:hover {
+            color: #333;
+        }
     </style>
 </head>
 <body>
 <div class="container">
+    <a class="return-button" href="http://localhost:8080/mainPage"><i class="fas fa-arrow-left"></i></a>
     <h1>{{module.module_name}} Versions</h1>
     <table>
         <thead>
